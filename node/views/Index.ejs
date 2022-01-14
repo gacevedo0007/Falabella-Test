@@ -1,0 +1,151 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Falabella</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link rel="stylesheet" href="/files/css/bootstrap.min.css">
+    <style type="text/css">
+        .header {
+            color: #36A0FF;
+            font-size: 27px;
+            padding: 10px;
+        }
+
+        .bigicon {
+            font-size: 35px;
+            color: #36A0FF;
+        }
+    </style>
+
+
+
+</head>
+
+
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="well well-sm">
+
+                    <fieldset>
+                        <legend class="text-center header">Codificar</legend>
+
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
+                            <div class="col-md-8">
+                                <input id="Cod_name" name="Cod_name" type="text" placeholder="Ingrese Valor"
+                                    class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i
+                                    class="fa fa-pencil-square-o bigicon"></i></span>
+                            <div class="col-md-8">
+                                <textarea class="form-control" id="Cod_message" name="Cod_message" placeholder=""
+                                    rows="7"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12 text-center">
+                                <button onclick="codificarobj()" class="btn btn-primary btn-lg">Consultar</button>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="well well-sm">
+
+                    <fieldset>
+                        <legend class="text-center header">Decodificar</legend>
+
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
+                            <div class="col-md-8">
+                                <input id="Decname" name="Decname" type="text" placeholder="Ingrese Code"
+                                    class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i
+                                    class="fa fa-pencil-square-o bigicon"></i></span>
+                            <div class="col-md-8">
+                                <textarea class="form-control" id="Decmessage" name="Decmessage" placeholder=""
+                                    rows="7"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12 text-center">
+                                <button onclick="decodifobj()" class="btn btn-primary btn-lg">Consultar</button>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+
+        //        resetData();
+
+        function codificarobj() {
+            var str = document.getElementById("Cod_name").value;
+            var array = [];
+            for (var i = str.length - 1; i >= 0; i--) {
+                array.unshift(['&#', str[i].charCodeAt(), ';'].join(''));
+            }
+            document.getElementById("Cod_message").value = array.join('');
+
+        }
+
+        function rep_for_desc(respuesta, val, carc, valorIngresado, i) {
+            for (let i = 0; i < Math.floor(Math.random() * 4); i++) {
+                respuesta = respuesta + val[Math.floor(Math.random() * val.length)] + carc[Math.floor(Math.random() * carc.length)];
+            }
+            respuesta = respuesta + valorIngresado[i];
+        }
+
+        function decodifobj() {
+
+            var Codificado = document.getElementById("Decname").value;
+
+            document.getElementById("Decmessage").value = Codificado.replace(/&#(\d+);/g, function (match, dec) {
+                return String.fromCharCode(dec);
+            });
+
+
+        }
+       /* function resetData() {
+             $('#Decname').val("");
+             $('#Decmessage').val("");
+             $('#Cod_message').val("");
+             $('#Decmessage').val("");
+         }*/
+
+    </script>
+
+
+
+</body>
+
+</html>
